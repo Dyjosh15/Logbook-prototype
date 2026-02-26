@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Welcome{% if user and user.name %}, {{ user.name }}{% endif %}</h2>
+  <p>Role: {{ user.role }}</p>
+  <p>Year/Department: {{ user.year_dept }}</p>
+  <p><a href="{{ url_for('entry') }}">Make a new log entry</a></p>
+{% endblock %}

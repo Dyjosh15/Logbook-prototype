@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}New Entry{% endblock %}
+
+{% block content %}
+<h2>Create New Entry</h2>
+
+<form method="POST">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required />
+
+  <label for="student_id">Student ID:</label>
+  <input type="text" id="student_id" name="student_id" required />
+
+  <label for="year_dept">Year/Department:</label>
+  <input type="text" id="year_dept" name="year_dept" required />
+
+  <label for="activity">Activity:</label>
+  <select id="activity" name="activity" required>
+    <option value="">Select Activity</option>
+    <option value="Library">Library</option>
+    <option value="Clinic">Clinic</option>
+    <option value="Laboratory">Laboratory</option>
+    <option value="Others">Others</option>
+  </select>
+
+  <div id="otherActivityField" style="display: none;">
+    <label for="activity_other">Please specify activity:</label>
+    <input type="text" id="activity_other" name="activity_other" placeholder="Enter activity details..." />
+  </div>
+
+  <label for="timein">Time In:</label>
+  <input type="time" id="timein" name="timein" required>
+
+  <button type="submit">Submit Entry</button>
+</form>
+{% endblock %}

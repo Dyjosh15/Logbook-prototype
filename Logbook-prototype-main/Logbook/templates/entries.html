@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}All Entries{% endblock %}
+
+{% block content %}
+<h2>All Entries</h2>
+
+<!-- Filter Controls -->
+<div class="filter-controls">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by name, student ID, activity..." />
+  </div>
+  <div class="filter-group">
+    <select id="activityFilter">
+      <option value="">All Activities</option>
+      <option value="Study">Study</option>
+      <option value="Lab">Lab</option>
+      <option value="Meeting">Meeting</option>
+      <option value="Library">Library</option>
+      <option value="Others">Others</option>
+    </select>
+    <select id="deptFilter">
+      <option value="">All Departments</option>
+      <option value="Engineering Student Council">Engineering Student Council</option>
+      <option value="Faculty">Faculty</option>
+    </select>
+    <input type="date" id="dateFilter" placeholder="Filter by Date" />
+    <button id="clearFilters" class="btn-secondary">Clear Filters</button>
+  </div>
+</div>
+
+<div class="entries-count">
+  <p>Showing <strong id="visibleCount">{{ entries|length }}</strong> of <strong id="totalCount">{{ entries|length }}</strong> entries</p>
+</div>
+
+<div class="table-wrapper">
+  <table id="entriesTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Student ID</th>
+        <th>Year/Dept</th>
+        <th>Dept/Office</th>
+        <th>Activity</th>
+        <th>Activity (Other)</th>
+        <th>Time In</th>
+        <th>Timestamp (PHT)</th>
+      </tr>
+    </thead>
+    <tbody id="entries-tbody">
+      {% for entry in entries %}
+        <tr data-name="{{ entry['name']|lower }}" data-activity="{{ entry['activity'] }}">
+          <td>{{ entry['name'] }}</td>
+          <td>{{ entry['student_id'] }}</td>
+          <td>{{ entry['year_dept'] }}</td>
+          <td>{{ entry['department_office'] or '-' }}</td>
+          <td>{{ entry['activity'] }}</td>
+          <td>{{ entry['activity_other'] or '-' }}</td>
+          <td>{{ entry['timein'] }}</td>
+          <td>{{ entry['timestamp'] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

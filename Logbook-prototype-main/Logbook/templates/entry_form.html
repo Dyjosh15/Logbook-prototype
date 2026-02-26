@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}New Entry{% endblock %}
+
+{% block content %}
+<h2>Create New Entry</h2>
+
+<form method="POST">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required />
+
+  <label for="student_id">Student ID:</label>
+  <input type="text" id="student_id" name="student_id" required />
+
+  <label for="year_dept">Year/Department:</label>
+  <input type="text" id="year_dept" name="year_dept" required />
+
+  <label for="department_office">Department/Office:</label>
+  <select id="department_office" name="department_office" required>
+    <option value="">Select Department/Office</option>
+    <option value="Engineering Student Council">Engineering Student Council</option>
+    <option value="Faculty">Faculty</option>
+  </select>
+
+  <label for="activity">Activity:</label>
+  <select id="activity" name="activity" required>
+    <option value="">Select Activity</option>
+    {% for act in activities %}
+    {% if act != "Others" %}
+    <option value="{{ act }}">{{ act }}</option>
+    {% endif %}
+    {% endfor %}
+    <option value="Others">Others</option>
+  </select>
+
+  <div id="otherActivityField" style="display: none;">
+    <label for="activity_other">Please specify activity:</label>
+    <input type="text" id="activity_other" name="activity_other" placeholder="Enter activity details..." />
+  </div>
+
+  <button type="submit">Record Entry</button>
+</form>
+
+<script>
+  document.getElementById('activity').addEventListener('change', function() {
+    const otherField = document.getElementById('otherActivityField');
+    const otherInput = document.getElementById('activity_other');
+    
+    if (this.value === 'Others') {
+      otherField.style.display = 'block';
+      otherInput.required = true;
+    } else {
+      otherField.style.display = 'none';
+      otherInput.required = false;
+      otherInput.value = '';
+    }
+  });
+</script>
+{% endblock %}

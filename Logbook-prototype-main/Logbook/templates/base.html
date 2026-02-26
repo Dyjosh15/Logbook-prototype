@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Logbook System - {% block title %}Home{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1>📔 Logbook System</h1>
+      <nav>
+        <a href="{{ url_for('entry') }}">➕ New Entry</a>
+        <a href="{{ url_for('entries') }}">📋 View All Entries</a>
+      </nav>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">
+            {% for m in messages %}
+              {{ m }}{% if not loop.last %}<br>{% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
